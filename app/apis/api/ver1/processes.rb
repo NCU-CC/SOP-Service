@@ -7,7 +7,8 @@ module API
         	# GET /api/v1/products
         	desc 'Return all products.'
         	get do
-        		['processes']
+        		# ['processes']
+                Flow.all
         	end
 
         	# GET /api/v1/processes/{:id}

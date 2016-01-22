@@ -7,7 +7,8 @@ module API
         	# GET /api/v1/products
         	desc 'Return all Steps.'
         	get do
-        		['steps']
+        		# ['steps']
+                Step.all
         	end
 
         	# GET /api/v1/processes/{:id}
