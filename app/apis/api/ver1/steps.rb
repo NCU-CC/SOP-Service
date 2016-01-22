@@ -1,13 +1,13 @@
 module API
   module Ver1
-    class Processes < Grape::API
+    class Steps < Grape::API
 
-    	resource :processes do
+    	resource :steps do
 
         	# GET /api/v1/products
-        	desc 'Return all products.'
+        	desc 'Return all Steps.'
         	get do
-        		['processes']
+        		['steps']
         	end
 
         	# GET /api/v1/processes/{:id}

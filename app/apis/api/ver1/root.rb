@@ -6,6 +6,7 @@ module API
       format :json
 
       mount API::Ver1::Processes
+      mount API::Ver1::Steps
       # mount API::Ver1::Products
     end
   end
