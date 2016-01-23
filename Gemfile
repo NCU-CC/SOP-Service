@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ####add gem
 
 gem 'grape'
-
+gem 'awesome_rails_console'
 ####
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
