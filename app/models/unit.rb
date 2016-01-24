@@ -1,6 +1,5 @@
 class Unit < ActiveRecord::Base
 	self.table_name = "Unit"
-	# establish_connection :location_development
-	establish_connection "#{Rails.env}_location"
+	establish_connection :production_location
 
 end
