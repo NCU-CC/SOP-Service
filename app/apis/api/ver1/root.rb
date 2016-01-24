@@ -7,6 +7,7 @@ module API
       
       mount API::Ver1::Processes
       mount API::Ver1::Steps
+      mount API::Ver1::People
     end
   end
 end
