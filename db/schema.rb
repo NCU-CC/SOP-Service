@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160124212634) do
+ActiveRecord::Schema.define(version: 20160125024706) do
 
   create_table "flows", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -27,6 +27,9 @@ ActiveRecord::Schema.define(version: 20160124212634) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "Flow_id",    limit: 4
+    t.integer  "PersonId",   limit: 4
+    t.string   "UnitId",     limit: 255
+    t.integer  "PlaceId",    limit: 4
   end
 
   add_index "steps", ["Flow_id"], name: "index_steps_on_Flow_id", using: :btree
