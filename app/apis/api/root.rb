@@ -4,6 +4,7 @@ module API
     prefix 'sop'
 
     mount API::Ver1::Root
+    mount API::Entities::Place
     #mount API::Ver2::Root
   end
 end

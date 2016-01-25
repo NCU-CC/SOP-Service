@@ -5,7 +5,8 @@ module API
     	resource :places do
     		desc 'Return all Place.'
     		get do
-    	        Place.all
+    	        place=Place.all
+    	        # present place, with: API::Entities::Place
     		end
       	end
     end
