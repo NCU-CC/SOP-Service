@@ -53,7 +53,7 @@ module API
                 step.items=params[:items] unless params[:items].nil?
                 step.prev=params[:prev] unless params[:prev].nil?
                 step.next=params[:next] unless params[:next].nil?
-                 step.save
+                step.save
             end
             
             

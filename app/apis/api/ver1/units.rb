@@ -12,16 +12,18 @@ module API
 
 
             #應該為get ，但字串無法parse
-            desc 'Return a unit'
-            params do
-                requires :unit_no, type: String, desc: "Unit identifier"
-            end
-            post  do
-                # Unit.first
-                unit=Unit.find_by unit_no: params[:unit_no]
-                present unit, with: API::Entities::Unit
-                # Unit.find_by unit_no: params[:unit_no]
-            end
+            # desc 'Return a unit'
+            # params do
+            #     requires :unit_no, type: String, desc: "Unit identifier"
+            # end
+            # post  do
+            #     # Unit.first
+            #     place=Place.first
+            #     unit=Unit.find_by unit_no: params[:unit_no]
+            #     b=present unit, as: :users, with: API::Entities::Unit
+            #     a=present place, as: :us, with: API::Entities::Place
+            #     # Unit.find_by unit_no: params[:unit_no]
+            # end
       	end
     end
  end
