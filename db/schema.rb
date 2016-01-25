@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160124182648) do
+ActiveRecord::Schema.define(version: 20160124212634) do
 
   create_table "flows", force: :cascade do |t|
     t.string   "name",       limit: 255

@@ -59,9 +59,9 @@ production:
   username: sop_api
   password: <%= ENV['SOP_API_DATABASE_PASSWORD'] %>
 
-# location_development:
-#       # adapter: 
-#       # username: root
-#       # password:
-#       <<: *default 
-#       database: location_service
+production_location:
+      # adapter: 
+      # username: root
+      # password:
+      <<: *default 
+      database: location_service

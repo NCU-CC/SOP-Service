@@ -8,6 +8,8 @@ module API
       mount API::Ver1::Processes
       mount API::Ver1::Steps
       mount API::Ver1::People
+      mount API::Ver1::Units
+      mount API::Ver1::Places
     end
   end
 end
