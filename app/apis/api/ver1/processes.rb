@@ -8,7 +8,8 @@ module API
         	desc 'Return all processes.'
         	get do
         		# ['processes']
-                Flow.all
+                flow=Flow.all
+                present flow , with: API::Entities::Process
         	end
 
             
@@ -17,7 +18,8 @@ module API
               requires :process_id, type: Integer, desc: 'Process id.'
             end
             get ':process_id' do
-              Flow.find(params[:process_id])
+              flow=Flow.find(params[:process_id])
+              present flow , with: API::Entities::Process
             end
 
             route_param :process_id do

@@ -6,7 +6,8 @@ module API
 
       mount API::Entities::Place
       mount API::Entities::Unit
-      
+      mount API::Entities::Person
+      mount API::Entities::Process
       
     end
   end

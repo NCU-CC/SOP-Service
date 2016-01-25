@@ -7,7 +7,6 @@ module API
     		get do
     	        unit =Unit.all
                 present unit, with: API::Entities::Unit
-    	        # ['ddd']
     		end
 
 
