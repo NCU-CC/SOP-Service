@@ -5,9 +5,23 @@ module API
     	resource :units do
     		desc 'Return all unit.'
     		get do
-    	        Unit.all
+    	        unit =Unit.all
+                present unit, with: API::Entities::Unit
     	        # ['ddd']
     		end
+
+
+            #應該為get ，但字串無法parse
+            desc 'Return a unit'
+            params do
+                requires :unit_no, type: String, desc: "Unit identifier"
+            end
+            post  do
+                # Unit.first
+                unit=Unit.find_by unit_no: params[:unit_no]
+                present unit, with: API::Entities::Unit
+                # Unit.find_by unit_no: params[:unit_no]
+            end
       	end
     end
  end

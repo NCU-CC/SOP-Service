@@ -1,10 +1,10 @@
 module API
 	module Entities
-		class Place < Grape::Entity
-			expose :id
+		class Unit < Grape::Entity
+			expose :unit_no
 			expose :cname
 			expose :ename
-			expose :type
+			expose :full_name
 
 		end
 	end

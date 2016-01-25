@@ -6,7 +6,7 @@ module API
     		desc 'Return all Place.'
     		get do
     	        place=Place.all
-    	        # present place, with: API::Entities::Place
+    	        present place, with: API::Entities::Place
     		end
       	end
     end
