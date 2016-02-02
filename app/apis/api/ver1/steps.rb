@@ -35,7 +35,7 @@ module API
                     next:params[:next],
                     Flow_id: params[:flow_id]
                 })
-
+                
             end
 
             desc "update a step"
@@ -47,13 +47,14 @@ module API
                 optional :next, type:String, desc: "next step"
             end
 
-            put do
+            put ':id' do
                 step=Step.find(params[:id])
                 step.action=params[:action] unless params[:action].nil?
                 step.items=params[:items] unless params[:items].nil?
                 step.prev=params[:prev] unless params[:prev].nil?
                 step.next=params[:next] unless params[:next].nil?
                 step.save
+                step
             end
             
             
