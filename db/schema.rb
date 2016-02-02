@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160125024706) do
+ActiveRecord::Schema.define(version: 20160202100622) do
 
   create_table "flows", force: :cascade do |t|
     t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "steplogs", force: :cascade do |t|
+    t.string   "action",     limit: 255
+    t.string   "user",       limit: 255
+    t.string   "client_id",  limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
