@@ -4,5 +4,6 @@ class Place < ActiveRecord::Base
 	# attr_accessible :type
 	establish_connection :production_location
 
-	# have_many :
+	has_many :building_units
+	has_many :units ,:through=> :building_units
 end
