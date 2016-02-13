@@ -2,10 +2,10 @@ module API
 		module Log
 			extend Grape::API::Helpers
 			
-		  def log action
-        Steplog.create!({
+		def Process_log action
+        	Flowlog.create!({
                     action: action,
                 })
-      end
+      	end
   end
 end

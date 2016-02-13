@@ -11,7 +11,7 @@ module API
         ### after action that record the log expect 'Get'
         after do 
             unless request.request_method=='GET'
-                log request.request_method
+                Process_log request.request_method
             end
             
         end
@@ -22,7 +22,7 @@ module API
         	desc 'Return all processes.'
         	get do
         		# ['processes']
-                flow=Flow.all
+                flow=Flow.where(:flag=>nil).all
                 present flow , with: API::Entities::Process
 
         	end
@@ -58,6 +58,7 @@ module API
                 Flow.create!({
                     name: params[:name],
                 })
+
             end
 
 
@@ -81,7 +82,8 @@ module API
             desc "delete a Process"
             delete ':id' do
                 process=Flow.find(params[:id])
-                process.delete
+                process.flag=false
+                process.save
                 ['success']
             end
 
