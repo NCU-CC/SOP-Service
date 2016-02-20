@@ -6,26 +6,30 @@ module API
      			['bay']
   		end
 
-  		def token 
-          
-          this_token_string = token_string
-            RestClient.get Settings::OAUTH_TOKEN_URL + this_token_string + '?ip=127.0.0.1&referer=http://www.gamer.com.tw', {x_ncu_api_token: Settings::NCU_API_TOKEN} do |response, request, result, &block|
-               if response.code == 200
-                 this_token_string
-               end
-               #token_err 401, 'invalid_token'
-            this_token_string=response.request
-           
-          
-  		end
+  		def api_token_check
+          this_token = token_string
+          response=RestClient::Request.execute method: :get, url: Settings::OAUTH_TOKEN_URL + this_token+'?ip=127.0.0.1&referer=http://www.gamer.com.tw', headers: {x_ncu_api_token: Settings::NCU_API_TOKEN}
+          res=JSON.parse response.body
+      end
+
+      def access_token_check
+          this_token = token_string
+          response=RestClient::Request.execute method: :get, url: Settings::OAUTH_ACCESS_TOKEN_URL + this_token+'?ip=127.0.0.1&referer=http://www.gamer.com.tw', headers: {x_ncu_api_token: Settings::NCU_API_TOKEN}
+          res=JSON.parse response.body
+      end
 
   		def token_string
   			   token_string_from_header || token_string_from_request_params
   		end
 
   		def token_string_from_header
-  		    headers['X-Ncu-Api-Token']
+          if headers['Authorization']==nil?
+            headers['Authorization'][/^Bearer (.*)/, 1]
+          else
+            headers['X-Ncu-Api-Token']
+          end
   		end
+
 
   		def token_string_from_request_params
   			   params[:api_token]
@@ -35,6 +39,6 @@ module API
          {:error_code => code, :error_message => massage}
       end
   				
-		end
+		
   end
 end

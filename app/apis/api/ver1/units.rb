@@ -1,6 +1,11 @@
 module API
   module Ver1
     class Units < Grape::API
+        
+        helpers API::Log
+        helpers API::Helpers
+
+
 
     	resource :units do
     		desc 'Return all unit.'

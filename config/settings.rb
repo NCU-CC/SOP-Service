@@ -1,5 +1,6 @@
 module Settings
-	NCU_API_TOKEN='f8b15dc3de98bbe7cb99eb94033b83350c9a66cef81d55424a5dd50db4ba1a2a2bd5584368a822bd12e9be119781a161acc642108d1dc72b3d2f396b1712e895'
-	OAUTH_TOKEN_URL = 'https://api.cc.ncu.edu.tw/oauth/management/v1/api_tokens/token/'
-
+	NCU_API_TOKEN='f642b6e001a302605d27daf146952fba68c4ffe86758d3b546cbbdae72720aaa49a2d22b67d8ec2e06aa4fe4e384f7429450ebe4ceb3a23dc6499eb28905ce79'
+	OAUTH_TOKEN_URL = 'http://140.115.3.188/oauth/management/v1/api_tokens/token/'
+						
+	OAUTH_ACCESS_TOKEN_URL='http://140.115.3.188/oauth/management/v1/access_tokens/token/'
 end 

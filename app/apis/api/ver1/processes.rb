@@ -1,30 +1,39 @@
 module API
   module Ver1
     class Processes < Grape::API
-        # 
+         
         helpers API::Log
-        ###
+        helpers API::Helpers
+
         ### before action that 
+        before do 
+            unless request.request_method=='GET'
+                @res=access_token_check 
+            else
+                @res=api_token_check 
+            end
+            header 'Content-Type', 'application/json;charset=UTF-8'
+        end
 
-
-        ###
+        
         ### after action that record the log expect 'Get'
         after do 
             unless request.request_method=='GET'
-                Process_log request.request_method
+                Process_log request.request_method,@res['user'],@res['client_id'],@id
             end
             
         end
+        ###
+
     	resource :processes do
 
         	#####
             #####GET alll
         	desc 'Return all processes.'
         	get do
-        		# ['processes']
-                flow=Flow.where(:flag=>nil).all
-                present flow , with: API::Entities::Process
-
+                # flow=Flow.where(:flag=>nil).all
+                # present flow , with: API::Entities::Process
+                @res                
         	end
 
             #####
@@ -37,12 +46,9 @@ module API
               flow=Flow.find(params[:process_id])
               present flow , with: API::Entities::Process
             end
-
             route_param :process_id do
                 resource :steps do
                     get do
-                        # Flow.find(params[:id])
-                        # :id
                         Flow.find(params[:process_id]).steps
                     end
                 end
@@ -58,6 +64,10 @@ module API
                 Flow.create!({
                     name: params[:name],
                 })
+                @id=Flow.last.id
+                flow=Flow.last
+                present flow , with: API::Entities::Process
+                ##新增後顯示
 
             end
 
@@ -66,11 +76,10 @@ module API
             ### PUT a Process
             desc "update a Process"
             params do
-                # requires :id, type: Integer, desc: "Process identifier"
                 requires :name, type: String, desc: "name of Process"
-                
             end
             put ':id' do
+                @id=params[:id]
                 flow=Flow.find(params[:id])
                 flow.name=params[:name] unless params[:name].nil?
                 flow.save
@@ -81,6 +90,7 @@ module API
             ### DELETE a Process
             desc "delete a Process"
             delete ':id' do
+                @id=params[:id]
                 process=Flow.find(params[:id])
                 process.flag=false
                 process.save

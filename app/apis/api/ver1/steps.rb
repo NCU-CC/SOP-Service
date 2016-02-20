@@ -1,6 +1,14 @@
 module API
   module Ver1
     class Steps < Grape::API
+        helpers API::Log
+
+        after do 
+            unless request.request_method=='GET'
+                Step_log request.request_method
+            end
+            
+        end
 
     	resource :steps do
 
@@ -8,7 +16,8 @@ module API
         	desc 'Return all Steps.'
         	get do
         		# ['steps']
-                Step.all
+                step=Step.where(:flag=>nil).all
+                present step ,with: API::Entities::Step
         	end
 
             desc "Return a step"
@@ -16,7 +25,8 @@ module API
                 requires :id ,type: Integer, desc: "Step identifier"
             end
             get ':id' do 
-                Step.find(params[:id])
+                step=Step.find(params[:id])
+                present step ,with: API::Entities::Step
             end
 
             desc "Create a step"
@@ -54,7 +64,15 @@ module API
                 step.prev=params[:prev] unless params[:prev].nil?
                 step.next=params[:next] unless params[:next].nil?
                 step.save
-                step
+                present step ,with: API::Entities::Step
+            end
+
+            desc "delete a Process"
+            delete ':id' do
+                process=Step.find(params[:id])
+                process.flag=false
+                process.save
+                ['success']
             end
             
             

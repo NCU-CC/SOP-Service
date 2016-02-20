@@ -1,16 +1,6 @@
 module API
   module Ver1
     class People < Grape::API
-        helpers API::Helpers
-        helpers do
-          def find_token 
-             # this_token = token 
-
-          end
-        end
-        
-
-
     	resource :people do
     		desc 'Return all Person.'
     		get do
