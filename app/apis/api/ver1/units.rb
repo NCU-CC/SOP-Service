@@ -1,12 +1,12 @@
 module API
   module Ver1
     class Units < Grape::API
-
-        helpers API::Log
         helpers API::Helpers
-
+        before do 
+            @res=token_check
+            header 'Content-Type', 'application/json;charset=UTF-8'
+        end
         
-
     	resource :units do
     		desc 'Return all unit.'
     		get do
@@ -21,11 +21,12 @@ module API
                 requires :unit_no, type: String, desc: "Unit identifier"
             end
             get ':unit_no' do
-
                 unit=Unit.find(params[:unit_no])  
                 present unit, with: API::Entities::Unit
             
             end
+
+
       	end
     end
  end

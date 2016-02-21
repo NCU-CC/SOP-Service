@@ -7,11 +7,7 @@ module API
 
         ### before action that 
         before do 
-            unless request.request_method=='GET'
-                @res=access_token_check 
-            else
-                @res=api_token_check 
-            end
+            @res=token_check
             header 'Content-Type', 'application/json;charset=UTF-8'
         end
 
@@ -31,9 +27,8 @@ module API
             #####GET alll
         	desc 'Return all processes.'
         	get do
-                # flow=Flow.where(:flag=>nil).all
-                # present flow , with: API::Entities::Process
-                @res                
+                flow=Flow.where(:flag=>nil).all
+                present flow , with: API::Entities::Process
         	end
 
             #####
@@ -64,8 +59,8 @@ module API
                 Flow.create!({
                     name: params[:name],
                 })
-                @id=Flow.last.id
                 flow=Flow.last
+                @id=flow.id
                 present flow , with: API::Entities::Process
                 ##新增後顯示
 

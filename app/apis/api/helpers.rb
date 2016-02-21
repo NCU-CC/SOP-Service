@@ -2,20 +2,23 @@ module API
 		module Helpers
 			extend Grape::API::Helpers
 			
-			def bay
-     			['bay']
-  		end
-
-  		def api_token_check
+      def token_check
           this_token = token_string
-          response=RestClient::Request.execute method: :get, url: Settings::OAUTH_TOKEN_URL + this_token+'?ip=127.0.0.1&referer=http://www.gamer.com.tw', headers: {x_ncu_api_token: Settings::NCU_API_TOKEN}
-          res=JSON.parse response.body
+          url_oauth=getURL request.request_method
+          getRES url_oauth,this_token
       end
 
-      def access_token_check
-          this_token = token_string
-          response=RestClient::Request.execute method: :get, url: Settings::OAUTH_ACCESS_TOKEN_URL + this_token+'?ip=127.0.0.1&referer=http://www.gamer.com.tw', headers: {x_ncu_api_token: Settings::NCU_API_TOKEN}
-          res=JSON.parse response.body
+      def getURL request_method
+        if request_method=='GET'
+          Settings::OAUTH_TOKEN_URL
+        else
+          Settings::OAUTH_ACCESS_TOKEN_URL
+        end
+      end
+
+      def getRES url_oauth,token
+        response=RestClient::Request.execute method: :get, url: url_oauth + token+'?ip=127.0.0.1&referer=http://www.gamer.com.tw', headers: {x_ncu_api_token: Settings::NCU_API_TOKEN}
+        res=JSON.parse response.body
       end
 
   		def token_string
@@ -23,7 +26,7 @@ module API
   		end
 
   		def token_string_from_header
-          if headers['Authorization']==nil?
+          if headers['X-Ncu-Api-Token']==nil
             headers['Authorization'][/^Bearer (.*)/, 1]
           else
             headers['X-Ncu-Api-Token']

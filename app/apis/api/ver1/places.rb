@@ -1,6 +1,12 @@
 module API
   module Ver1
     class Places < Grape::API
+      helpers API::Helpers
+      before do 
+          @res=token_check
+          header 'Content-Type', 'application/json;charset=UTF-8'
+      end
+      
     	resource :places do
     		desc 'Return all Place.'
     		get do

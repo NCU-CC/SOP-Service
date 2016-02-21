@@ -14,7 +14,7 @@ module API
 
       	def Step_log action,user,client_id,step_id
       		Steplog.create!({
-      			action: action
+      			action: action,
             user: user, 
             client_id: client_id,
             step_id: step_id
@@ -22,3 +22,4 @@ module API
       	end
   end
 end
+

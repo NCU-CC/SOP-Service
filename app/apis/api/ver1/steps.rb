@@ -2,10 +2,16 @@ module API
   module Ver1
     class Steps < Grape::API
         helpers API::Log
+        helpers API::Helpers
+
+        before do 
+            @res=token_check
+            header 'Content-Type', 'application/json;charset=UTF-8'
+        end
 
         after do 
             unless request.request_method=='GET'
-                Step_log request.request_method
+                Step_log request.request_method,@res['user'],@res['client_id'],@id
             end
             
         end
@@ -15,7 +21,6 @@ module API
         	# GET /api/v1/products
         	desc 'Return all Steps.'
         	get do
-        		# ['steps']
                 step=Step.where(:flag=>nil).all
                 present step ,with: API::Entities::Step
         	end
@@ -45,7 +50,9 @@ module API
                     next:params[:next],
                     Flow_id: params[:flow_id]
                 })
-                
+                step=Step.last
+                @id=step.id
+                present step ,with: API::Entities::Step
             end
 
             desc "update a step"
@@ -69,7 +76,7 @@ module API
 
             desc "delete a Process"
             delete ':id' do
-                process=Step.find(params[:id])
+                press=Step.find(params[:id])
                 process.flag=false
                 process.save
                 ['success']
