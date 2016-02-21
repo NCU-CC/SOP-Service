@@ -12,9 +12,12 @@ module API
           })
       	end
 
-      	def Step_log action
+      	def Step_log action,user,client_id,step_id
       		Steplog.create!({
       			action: action
+            user: user, 
+            client_id: client_id,
+            step_id: step_id
       		})
       	end
   end
