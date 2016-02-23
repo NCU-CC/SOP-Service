@@ -5,7 +5,8 @@
 /log/*
 !/log/.keep
 /tmp
-/config/*
+/config/settings.*
+/config/database.*
 /Gemfile.lock
 [._]*.swp
 
