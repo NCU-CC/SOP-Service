@@ -16,11 +16,13 @@ module API
         end
       end
 
+      #APPs的api token
       def getRES url_oauth,token
         response=RestClient::Request.execute method: :get, url: url_oauth + token+'?ip=127.0.0.1&referer=http://www.gamer.com.tw', headers: {x_ncu_api_token: Settings::NCU_API_TOKEN}
         res=JSON.parse response.body
       end
 
+      #取得request的api token
   		def token_string
   			   token_string_from_header || token_string_from_request_params
   		end
