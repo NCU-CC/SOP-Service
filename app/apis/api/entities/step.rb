@@ -6,7 +6,7 @@ module API
 			expose :items
 			expose :prev
 			expose :next
-			expose :Flow_id
+			expose :flow_id
 			expose :PersonId
 			expose :UnitId
 			expose :PlaceId
