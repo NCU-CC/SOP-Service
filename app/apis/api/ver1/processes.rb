@@ -32,6 +32,16 @@ module API
         	end
 
             #####
+            # Get process by name
+            desc 'search project by name'
+                params do
+                        requires :name,type: String, desc: 'project name'
+                end
+                get ':name' do
+                        project_name=params[:name]
+                        flow=Flow.where("name LIKE?","%#{project_name}%")
+                        present flow , with: API::Entities::Process
+                end
             #####Get one process
         	desc 'Return a Process.'
             params do

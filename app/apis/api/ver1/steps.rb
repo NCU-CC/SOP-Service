@@ -40,7 +40,7 @@ module API
                 requires :items, type: String, desc: "you need take something"
                 requires :prev, type:String, desc: "previous step"
                 requires :next, type:String, desc: "next step"
-                requires :flow_id, type:String, desc: "belong what's process"
+                requires :Flow_id, type:String, desc: "belong what's process"
             end
             post do
                 Step.create!({
@@ -48,7 +48,7 @@ module API
                     items: params[:items],
                     prev: params[:prev],
                     next:params[:next],
-                    Flow_id: params[:flow_id]
+                    flow_id: params[:flow_id]
                 })
                 step=Step.last
                 @id=step.id

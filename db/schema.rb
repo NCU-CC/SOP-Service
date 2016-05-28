@@ -45,14 +45,14 @@ ActiveRecord::Schema.define(version: 20160220185553) do
     t.string   "next",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
-    t.integer  "Flow_id",    limit: 4
+    t.integer  "flow_id",    limit: 4
     t.integer  "PersonId",   limit: 4
     t.string   "UnitId",     limit: 255
     t.integer  "PlaceId",    limit: 4
     t.boolean  "flag"
   end
 
-  add_index "steps", ["Flow_id"], name: "index_steps_on_Flow_id", using: :btree
+  add_index "steps", ["flow_id"], name: "index_steps_on_flow_id", using: :btree
 
-  add_foreign_key "steps", "Flows"
+  add_foreign_key "steps", "flows"
 end
